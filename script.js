@@ -68,3 +68,15 @@ function updateBigCup() {
         liters.innerText = `${1 - (50 * fullCups / 1000)}L`
     }
 }
+// Use the Fetch API to call ipify and get the user's public IP
+fetch('https://api.ipify.org?format=json')
+  .then(response => response.json()) // Convert the response to JSON
+  .then(data => {
+    // Extract the IP and show it in the HTML element
+    document.getElementById('ipDisplay').textContent = data.ip;
+  })
+  .catch(error => {
+    // In case of error, show a fallback message
+    document.getElementById('ipDisplay').textContent = 'Unable to fetch IP address.';
+    console.error('Error fetching IP:', error);
+  });
