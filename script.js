@@ -57,26 +57,28 @@ function updateBigCup() {
     } else {
         percentage.style.visibility = 'visible'
         percentage.style.height = `${fullCups / totalCups * 330}px`
-        percentage.innerText = `${fullCups / totalCups * 1000}%`
+        // percentage.innerText = `${fullCups / totalCups * 1000}%`
+        percentage.innerText = `${(fullCups / totalCups) * 100}%`
     }
 
-    if (fullCups === totalCups) {
-        remained.style.visibility = 'hidden'
-        remained.style.height = 0
-    } else {
-        remained.style.visibility = 'visible'
-        liters.innerText = `${1 - (50 * fullCups / 1000)}L`
+        if (fullCups === totalCups) {
+            remained.style.visibility = 'hidden'
+            remained.style.height = 0
+        } else {
+            remained.style.visibility = 'visible'
+            //liters.innerText = `${1 - (50 * fullCups / 2000)}L`
+            liters.innerText = `${2 - (0.25 * fullCups)}L`
+        }
     }
-}
-// Use the Fetch API to call ipify and get the user's public IP
-fetch('https://api.ipify.org?format=json')
-  .then(response => response.json()) // Convert the response to JSON
-  .then(data => {
-    // Extract the IP and show it in the HTML element
-    document.getElementById('ipDisplay').textContent = data.ip;
-  })
-  .catch(error => {
-    // In case of error, show a fallback message
-    document.getElementById('ipDisplay').textContent = 'Unable to fetch IP address.';
-    console.error('Error fetching IP:', error);
-  });
+    // Use the Fetch API to call ipify and get the user's public IP
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json()) // Convert the response to JSON
+        .then(data => {
+            // Extract the IP and show it in the HTML element
+            document.getElementById('ipDisplay').textContent = data.ip;
+        })
+        .catch(error => {
+            // In case of error, show a fallback message
+            document.getElementById('ipDisplay').textContent = 'Unable to fetch IP address.';
+            console.error('Error fetching IP:', error);
+        });
